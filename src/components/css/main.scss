@@ -1,0 +1,125 @@
+@import 'fonts.scss';
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5em;
+  background: url(~/images/lol.jpg);
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  outline: none;
+  &:focus {
+    outline: none;
+  }
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --presentation-bg: #222;
+  --slide-text-color: white;
+}
+
+$stack-depth: 200;
+
+.presentation {
+
+  width: 100%;
+  height: 100%;
+  background: var(--presentation-bg);
+  color: var(--slide-text-color);
+  
+  h1 {
+    font-weight: 700;
+
+    &.zh {
+      font-family: 'Noto Sans CJK SC Black';
+    }
+  }
+
+
+  &.slides-mode {
+
+    perspective: 500px;
+    overflow: hidden;
+    
+    .slides {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      padding: 0px;
+      transform-style: preserve-3d;
+      transition: transform .75s;
+
+      @for $i from 1 through 100 {
+        .slide-#{$i} {
+          transform: translate3d(0px, 0px, #{$i * $stack-depth}px);
+        }
+      }
+
+      .slide {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transition: opacity .75s;
+        opacity: 0;
+
+        &.title {
+          display: grid;
+          grid-template-columns: 5% 1fr 5%;
+          grid-template-rows: 25% 1fr 25%;
+          grid-template-areas: "tx tx tx" "lx goose rx" "dx dx dx";
+          justify-content: stretch;	
+
+          > * {
+            display: none;
+          }
+
+          > div:nth-child(1) {
+            display: flex;
+            grid-area: goose;
+            align-items: center;
+
+            > * {
+              display: block;
+              flex-grow: 1;
+              text-align: center;
+            }
+          }
+        }
+
+      }
+    }
+
+    @for $i from 0 through 100 {
+      &.slide-#{$i} {
+        .slides {
+          transform: translate3d(0px, 0px, #{$i * -$stack-depth}px);
+          .slide.slide-#{$i} {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    @for $i from 1 through 100 {
+      &.transition-#{$i} {
+        .slide {
+          .transition-#{$i} {
+            opacity: 1;
+          }
+        }
+      }
+      .slide {
+        .transition-#{$i} {
+          opacity: 0;
+          transition: opacity .5s;
+        }
+      }
+    }
+  }
+}
