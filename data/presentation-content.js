@@ -141,12 +141,12 @@ const PresentationContent = [
     classes: ['image', 'leatherman', 'fs'],
   },
   {
-    en: '',
-    zh: '',
+    en: 'https://vimeo.com/226529471',
+    zh: 'https://vimeo.com/226529471',
     notes: [
       'Terminal Cornucopia'
     ],
-    classes: ['video', 'tc', 'fs'],
+    classes: ['fs', 'no-sub'],
   },
   {
     en: '',
@@ -157,12 +157,12 @@ const PresentationContent = [
     classes: ['image', 'hedberg', 'fs'],
   },
   {
-    en: '',
-    zh: '',
+    en: 'https://vimeo.com/226529073',
+    zh: 'https://vimeo.com/226529073',
     notes: [
       'Hedberg'
     ],
-    classes: ['video', 'hedberg', 'fs'],
+    classes: ['fs', 'no-sub'],
   },
   {
     en: '“Well that’s a pretty weird thing for someone to do”',
@@ -1042,7 +1042,7 @@ Here are some links for additional information on Flux and Redux
 
 - http://fort.ninja/hitb2018`,
     zh: `去建造一些很棒的工具吧!
-    
+
 - http://fort.ninja/hitb2018`,
     notes: [
       'Go build some great tools!'
