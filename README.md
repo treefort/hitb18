@@ -31,3 +31,5 @@ npm start
 ```
 
 If all goes well, [webpack-dev-server](https://github.com/webpack/webpack-dev-server) should build the assets in `development` mode and spin up a local webserver (default address is `http://localhost:8080`). This process should continue to run in the background; when it detects changes in the source files, it will rebuild and push changes to any connected browsers without needing to refresh the page.
+
+When you're ready to build production assets, run `npm run build` and they will magically appear in your `public/` directory.
