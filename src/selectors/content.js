@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 import { getDisplayLanguages } from 'selectors/languages';
 
-const getContent = ({ content }) => content;
+export const getContent = ({ content }) => content;
 
 export const getContentById = createSelector(
   getContent,
@@ -16,5 +16,3 @@ export const getContentById = createSelector(
       }), {})
   }
 );
-
-window.addEventListener('storage', data => console.warn(data), false);

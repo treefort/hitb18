@@ -1,0 +1,48 @@
+.presentation.notes-mode {
+  background: #222;
+  color: white;
+  
+  a {
+    color: #99fd99;
+  }
+  
+  height: 100%;
+  padding-top: 40px;
+
+  ul.translations {
+    list-style: none;
+    div {
+      display: none;
+    }
+    div.notes {
+      display: block;
+      ul {
+        list-style: disc;
+        li {
+          opacity: .6;
+          line-height: 1.7em;
+        }
+        li:nth-child(1) {
+          font-size: 1.2em;
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .slide:nth-child(1) {
+    color: white;
+  }
+  .slide:nth-child(2) {
+    color: gold;
+  }
+  .slide:nth-child(3) {
+    color: blue;
+  }
+  .slide {
+    &.video {
+      video {
+        display: none;
+      }
+    }
+  }
+}

@@ -15,10 +15,12 @@ module.exports = {
     alias: {
       actions: resolve(__dirname, 'src', 'actions'),
       selectors: resolve(__dirname, 'src', 'selectors'),
+      reducers: resolve(__dirname, 'src', 'reducers'),
       middleware: resolve(__dirname, 'src', 'middleware'),
       components: resolve(__dirname, 'src', 'components', 'containers'),
       views: resolve(__dirname, 'src', 'components', 'views'),
       css: resolve(__dirname, 'src', 'components', 'css'),
+      lib: resolve(__dirname, 'src', 'lib'),
       data: resolve(__dirname, 'data')
     }
   },

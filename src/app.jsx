@@ -4,9 +4,11 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-// import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
+import { setSlideIndex, setMode } from 'actions/presentationactions';
+import { getSlideIndex, getMode } from 'selectors/presentation';
 
 import 'normalize.css';
 
@@ -18,7 +20,6 @@ import Main from 'components/main';
 const loggerMiddleware = createLogger();
 
 const middleware = [
-  // thunkMiddleware.withExtraArgument({ emit: wsEmit }),
   loggerMiddleware,
   KeyboardMiddleware,
 ];
@@ -45,3 +46,18 @@ ReactDom.render(
   document.getElementById('root')
 );
   
+const handleLCUpdate = data => {
+  const state = store.getState();
+  const currentMode = getMode(state);
+  const slideIndex = getSlideIndex(state);
+  try {
+    const parsed = JSON.parse(data.newValue || '');
+    if (currentMode === 'slides' && parsed.slideIndex !== slideIndex) {
+      if (typeof parsed.slideIndex !== 'undefined') {
+        store.dispatch(setSlideIndex(parseInt(parsed.slideIndex, 10), parseInt(parsed.transitionIndex, 10)));
+      }
+    }
+  } catch(e) {}
+};
+
+window.addEventListener('storage', handleLCUpdate, false);

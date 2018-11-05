@@ -23,6 +23,10 @@ class KeyboardInput extends React.PureComponent {
       'ArrowDown',
       'ArrowLeft',
       'ArrowRight',
+      'PageUp',
+      'PageDown',
+      'm',
+      'l',
     ].indexOf(key) !== -1) {
       event.preventDefault();
       dispatchHandleKeypress({ key, shiftKey, ctrlKey });

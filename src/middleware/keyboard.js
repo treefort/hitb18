@@ -1,27 +1,38 @@
 import { HANDLE_KEYPRESS } from 'actions/keyboardactions';
-import { setSlideIndex } from 'actions/presentationactions';
+import { setSlideIndex, setMode } from 'actions/presentationactions';
+import { swapPrimaryLanguage } from 'actions/languageactions';
 
-import { getSlides } from 'selectors/slides';
-import { getNextSlideAndTransition, getPreviousSlideAndTransition } from 'selectors/presentation';
+import { 
+  getNextSlideIndex,
+  getNextMode,
+  getPreviousSlideIndex } from 'selectors/presentation';
 
 const handleKeypressAction = (store, action) => {
   const { key } = action;
   const state = store.getState();
-  
-  if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(key) !== -1) {
-    switch(key) {
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        // go back
-        store.dispatch(setSlideIndex(...getPreviousSlideAndTransition(state)));
-        break;
-      case 'ArrowRight':
-      case 'ArrowDown':
-        // go forward
-        store.dispatch(setSlideIndex(...getNextSlideAndTransition(state)));
-        break;
-      default:
-    }
+
+  switch(key) {
+    case 'l': 
+      // swap primary language
+      store.dispatch(swapPrimaryLanguage());
+      break;
+    case 'm':
+      // change presentation mode
+      store.dispatch(setMode(getNextMode(state)));
+      break;
+    case 'ArrowLeft':
+    case 'ArrowUp':
+    case 'PageUp':
+      // go back
+      store.dispatch(setSlideIndex(getPreviousSlideIndex(state)));
+      break;
+    case 'ArrowRight':
+    case 'ArrowDown':
+    case 'PageDown':
+      // go forward
+      store.dispatch(setSlideIndex(getNextSlideIndex(state)));
+      break;
+    default:
   }
 };
 

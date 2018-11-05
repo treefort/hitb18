@@ -1,6 +1,11 @@
 export const SET_SLIDE_INDEX = 'SET_SLIDE_INDEX';
-export const setSlideIndex = (slideIndex, transitionIndex = 0) => ({
+export const setSlideIndex = (slideIndex) => ({
   type: SET_SLIDE_INDEX,
   slideIndex,
-  transitionIndex,
+});
+
+export const SET_MODE = 'SET_MODE';
+export const setMode = mode => ({
+  type: SET_MODE,
+  mode,
 });

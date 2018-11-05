@@ -1,0 +1,242 @@
+
+.presentation.print-mode {
+  background: #222;
+  color: white;
+  padding: 40px 40px 40px 0px;
+  font-size: .75em;
+  
+  a {
+    color: #99fd99;
+  }
+  
+  video {
+    display: none;
+  }
+  ul.translations {
+    list-style: none;
+
+    > li {
+      display: none;
+    }
+
+    > li:nth-child(1) {
+      display: initial;
+    }
+  }
+  .slide {
+    &.image {
+      height: 350px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: left;
+      margin-left: 10mm;
+    }
+    &.title {
+      font-size: 3em;
+      font-weight: 700;
+    }
+    &.subtitle {
+      font-size: 1.5em;
+      font-weight: 700;
+    }
+    &.image.trencher {
+      background-image: url(~/images/trencher.jpg);
+    }
+    &.image.hedberg {
+      background-image: url(~/images/keurig.png);
+    }
+    &.image.leatherman {
+      background-image: url(~/images/leatherman.png);
+    }
+    &.image.todo1 {
+      background-image: url(~/images/todo.png);
+    }
+    &.image.todo2 {
+      background-image: url(~/images/todo2.png);
+    }
+    &.image.todo3 {
+      background-image: url(~/images/todo3.png);
+    }
+    &.image.todo_structure1 {
+      background-image: url(~/images/todo_structure1.png);
+    }
+    &.image.todo_structure2 {
+      background-image: url(~/images/todo_structure2.png);
+    }
+    &.image.todo_structure3 {
+      background-image: url(~/images/todo_structure3.png);
+    }
+    &.image.todo_structure4 {
+      background-image: url(~/images/todo_structure4.png);
+    }
+    &.image.action1 {
+      background-image: url(~/images/action1.png);
+    }
+    &.image.redux {
+      background-image: url(~/images/redux.png);
+    }
+  }
+}
+
+@media print {
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;   
+  }
+
+  :root {
+    --presentation-bg: #white;
+    --slide-text-color: black;
+  }
+
+  html, body, #root {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1em;
+  }
+  
+  @page { 
+    margin: 0;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+    outline: none;
+    &:focus {
+      outline: none;
+    }
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  $stack-depth: 200;
+
+  body {
+    background: white;
+    margin: 0;
+    width: 210mm; 
+    height: 296mm; 
+  }
+
+  .presentation {
+    padding: 0mm 10mm;
+    color: black!important;
+    background: white!important;
+
+    a {
+      color: #333;
+    }
+    
+    .slides {
+      margin: 0px;
+      padding: 0mm 10mm;
+      box-sizing: border-box;
+      position: relative;
+
+      .slide {
+        max-width: 210mm; 
+        margin: 10mm 0;
+        page-break-inside: avoid;
+        ul.translations {
+          list-style: none;
+          margin: 0px;
+          padding: 0px;
+          text-align: left;
+          
+          li {
+            p {
+              margin: .2em;
+            }
+            div.zh {
+              font-family: 'Noto Sans CJK SC Regular';
+            }
+          }
+          div.notes {
+            display: none;
+          }
+          > li:nth-child(2) {
+            color: #d7ff67;
+            font-size: .75em;
+            font-style: italic;
+          }
+        }
+        &.title {
+          font-size: 3em;
+          font-weight: 700;
+        }
+        &.subtitle {
+          font-size: 1.5em;
+          font-weight: 700;
+        }
+        &.links {
+          ul.translations {
+            ul {
+              list-style: disc;
+              margin: 1em;
+              padding: 1em;
+              font-size: .5em;
+            }
+          }
+        }
+        &.image {
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: left;
+          background-color: #222;
+        }
+        &.no-sub {
+          ul.translations {
+            > li:nth-child(2) {
+              display: none;
+            }
+          }
+        }
+        &.square {
+          display: none;
+        }
+        &.image {
+          height: 250px;
+        }
+        &.image.trencher {
+          background-image: url(~/images/trencher.jpg);
+        }
+        &.image.hedberg {
+          background-image: url(~/images/keurig.png);
+        }
+        &.image.leatherman {
+          background-image: url(~/images/leatherman.png);
+        }
+        &.image.todo1 {
+          background-image: url(~/images/todo.png);
+        }
+        &.image.todo2 {
+          background-image: url(~/images/todo2.png);
+        }
+        &.image.todo3 {
+          background-image: url(~/images/todo3.png);
+        }
+        &.image.todo_structure1 {
+          background-image: url(~/images/todo_structure1.png);
+        }
+        &.image.todo_structure2 {
+          background-image: url(~/images/todo_structure2.png);
+        }
+        &.image.todo_structure3 {
+          background-image: url(~/images/todo_structure3.png);
+        }
+        &.image.todo_structure4 {
+          background-image: url(~/images/todo_structure4.png);
+        }
+        &.image.action1 {
+          background-image: url(~/images/action1.png);
+        }
+        &.image.redux {
+          background-image: url(~/images/redux.png);
+        }
+      }
+    }
+  }
+}

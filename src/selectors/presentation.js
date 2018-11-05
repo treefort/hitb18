@@ -1,78 +1,45 @@
 import classNames from 'classnames';
 
-import { getSlideCount, getSlide } from 'selectors/slides';
+import { getNextIndex, getPreviousIndex } from 'lib/arrayutils';
+import { getSlides } from 'selectors/slides';
+import { PresentationMode } from 'reducers/presentation';
 
-const getTransitionClasses = index => [...Array(index).keys()].map(id => `transition-${id + 1}`).join(' ');
+const ModeToggleOrder = [
+  PresentationMode.SLIDES,
+  PresentationMode.NOTES,
+  PresentationMode.PRINT,
+];
 
 export const getSlideIndex = ({ presentation: { slideIndex }}) => slideIndex;
-export const getTransitionIndex = ({ presentation: { transitionIndex }}) => transitionIndex;
+
 export const getMode = ({ presentation: { mode }}) => mode;
+
+export const getNextMode = state => {
+  const currentMode = getMode(state);
+  const currentModeIndex = ModeToggleOrder.indexOf(currentMode);
+  const nextModeIndex = getNextIndex(currentModeIndex, ModeToggleOrder, true);
+  return ModeToggleOrder[nextModeIndex];
+};
+
 export const getClassnames = state => {
   const slideIndex = getSlideIndex(state);
-  const transitionIndex = getTransitionIndex(state);
-  const transitionClasses = getTransitionClasses(transitionIndex);
   const mode = getMode(state);
 
   return classNames({
     presentation: true,
     [`${mode}-mode`]: true,
     [`slide-${slideIndex}`]: true,
-    [transitionClasses]: transitionIndex,
   });
 };
 
-export const getNextSlideAndTransition = state => {
+export const getNextSlideIndex = state => {
   const slideIndex = getSlideIndex(state);
-  const transitionIndex = getTransitionIndex(state);
-  const { transitionCount } = getSlide(state, slideIndex) || {};
-  const slideCount = getSlideCount(state);
-  console.table({ 
-    slideIndex,
-    slideCount,
-    transitionIndex,
-    transitionCount,
-  });
-  if (slideIndex >= slideCount - 1) {
-    if (transitionIndex >= transitionCount) {
-      console.log('presentation is over');
-      return [ slideIndex, transitionCount ];
-    } else {
-      console.log('next transition');
-      return [ slideIndex, transitionIndex + 1 ];
-    }
-  } else {
-    if (transitionIndex >= transitionCount) {
-      console.log('next slide');
-      return [ slideIndex + 1, 0 ];
-    } else {
-      console.log('next transition');
-      return [ slideIndex, transitionIndex + 1 ];
-    }
-  }
+  const slidesArray = getSlides(state);
+  return getNextIndex(slideIndex, slidesArray);
 };
 
-
-export const getPreviousSlideAndTransition = state => {
+export const getPreviousSlideIndex = state => {
   const slideIndex = getSlideIndex(state);
-  const transitionIndex = getTransitionIndex(state);
-  const { transitionCount } = getSlide(state, slideIndex) || {};
-  const slideCount = getSlideCount(state);
-  if (slideIndex === 0) {
-    if (transitionIndex === 0) {
-      console.log('at beginning');
-      return [ slideIndex, transitionIndex ];
-    } else {
-      console.log('previous transition');
-      return [ slideIndex, transitionIndex - 1 ];
-    }
-  } else {
-    if (transitionIndex) {
-      console.log('previous transition');
-      return [ slideIndex, transitionIndex - 1 ];
-    } else {
-      const prevSlideIndex = slideIndex - 1;
-      const { transitionCount: prevSlideTransitionCount } = getSlide(state, prevSlideIndex);
-      return [ prevSlideIndex, prevSlideTransitionCount ];
-    }
-  }
+  const slidesArray = getSlides(state);
+  return getPreviousIndex(slideIndex, slidesArray);
 };

@@ -1,7 +1,13 @@
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
 
-import { SET_SLIDE_INDEX } from 'actions/presentationactions';
+import { SET_SLIDE_INDEX, SET_MODE } from 'actions/presentationactions';
+
+export const PresentationMode = {
+  SLIDES: 'slides', // single slide 'presentation' view
+  NOTES: 'notes',   // speaker notes
+  PRINT: 'print',   // complete doc with standard formatting
+};
 
 const persistConfig = {
   key: 'hitb:presentation',
@@ -11,8 +17,7 @@ const persistConfig = {
 
 const initialState = {
   slideIndex: 0,
-  transitionIndex: 0,
-  mode: 'presentation',
+  mode: PresentationMode.SLIDES,
 };
 
 const presentation = (state = initialState, action) => {
@@ -21,8 +26,12 @@ const presentation = (state = initialState, action) => {
       return {
         ...state,
         slideIndex: action.slideIndex,
-        transitionIndex: action.transitionIndex,
       }
+    case SET_MODE:
+      return {
+        ...state,
+        mode: action.mode,
+      };
     default:
       return { ...state };
   }

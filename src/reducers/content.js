@@ -1,11 +1,18 @@
-import GetContent from 'data/presentation-content';
+import { pick } from 'lodash';
 
-const initialState = GetContent();
+import PresentationContent from 'data/presentation-content';
+
+const initialState = PresentationContent.map(
+  (slideContent, slideNum) => pick(slideContent, [
+      'en',
+      'zh',
+      'notes',
+    ]));
 
 const content = (state = initialState, action) => {
   switch (action.type) {
     default:
-      return { ...state };
+      return [ ...state ];
   }
 };
 

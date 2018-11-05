@@ -1,1 +1,4 @@
-export const getDisplayLanguages = ({ languages }) => languages;
+export const getDisplayLanguages = ({ languages }) => ([
+  ...languages,
+  'notes',
+]);

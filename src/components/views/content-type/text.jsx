@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
+import { isArray } from 'lodash';
+
+const langContentPreflight = content => 
+  isArray(content) ? content.map(item => `- ${item}`).join('\n') : content;
 
 const translations = (contentId, content) => Object.keys(content).map(
   lang => (
     <li key={`text_${contentId}_${lang}`}>
       <ReactMarkdown
         className={lang} 
-        source={ content[lang] } />
+        source={ langContentPreflight(content[lang]) } />
     </li>
   )
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-import { getClassnames } from 'selectors/presentation';
+import { getClassnames, getSlideIndex } from 'selectors/presentation';
 import { getDisplayLanguages } from 'selectors/languages';
 
 import Main from 'views/main';
@@ -17,6 +17,7 @@ const selectFirstLanguage = state => {
 const mapStateToProps = state => ({
   classnames: getClassnames(state),
   lang: selectFirstLanguage(state),
+  slideIndex: getSlideIndex(state),
 });
 
 const MainContainer = connect(mapStateToProps)(Main);
