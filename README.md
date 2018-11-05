@@ -7,9 +7,9 @@ The compiled assets are available in the `public/` directory. These assets are c
 
 ## Keyboard shortcuts
 
-`arrow keys` and `page up/down` moves through slides
-`l` swaps the primary language (`en` and `zh` are available)
-`m` cycles through view modes: `slides`, `notes` (presenter view), and `print`
+- `arrow keys` and `page up/down` moves through slides
+- `l` swaps the primary language (`en` and `zh` are available)
+- `m` cycles through view modes: `slides`, `notes` (presenter view), and `print`
 
 ### A note about localStorage
 
